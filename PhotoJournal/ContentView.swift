@@ -29,7 +29,21 @@ struct Home : View {
                             .renderingMode(.template)
                             .foregroundColor(Color(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)))
                     }
+                    
+                    Button(action: {}) {
+                        Image(systemName: "magnifyingglass.circle")
+                            .renderingMode(.template)
+                            .foregroundColor(Color(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)))
+                    }
                 }
+                .padding()
+                
+                
+                HStack{
+                    Text("Trending")
+                        .font(.system(size: 40, weight: .bold))
+                }
+                
             }
         }
     }
