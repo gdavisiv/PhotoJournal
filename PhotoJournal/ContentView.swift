@@ -42,9 +42,24 @@ struct Home : View {
                 HStack{
                     Text("Trending")
                         .font(.system(size: 40, weight: .bold))
+                        .foregroundColor(Color(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)))
+                    
+                    Spacer(minLength: 0)
+                    
+                    Button(action: {}) {
+                        Image(systemName: "circle.grid.2x2")
+                            .renderingMode(.template)
+                            .foregroundColor(Color(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)))
+                    }
                 }
+                .padding(.horizontal)
                 
+                Spacer()
             }
         }
+        .background(
+            LinearGradient(gradient: .init(colors: [Color("top"),Color("bottom")]), startPoint: .top, endPoint: .bottom)
+                .edgesIgnoringSafeArea(.all)
+        )
     }
 }
