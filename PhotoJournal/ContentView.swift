@@ -22,16 +22,25 @@ struct ContentView_Previews: PreviewProvider {
 struct Home : View {
     
     @State var index = 0
+    @State var stories = [
+        Story(id: 0, image: "p0", offset: 0, title: "Jack the Persian and the Black Castle"),
+        Story(id: 1, image: "p1", offset: 0, title: "The Dreamer"),
+        Story(id: 2, image: "p2", offset: 0, title: "Love found again"),
+        Story(id: 3, image: "p3", offset: 0, title: "The Haunted Grounds")
+    ]
     
     var body: some View{
         ScrollView(.vertical, showsIndicators: true){
             VStack{
+                //Top: Menu options
                 HStack{
                     Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
                         Image(systemName: "rectangle.3.offgrid")
                             .renderingMode(.template)
                             .foregroundColor(Color(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)))
                     }
+                    
+                    Spacer()
                     
                     Button(action: {}) {
                         Image(systemName: "magnifyingglass.circle")
@@ -41,7 +50,7 @@ struct Home : View {
                 }
                 .padding()
                 
-                
+                //Secondary: Main Trending Bar with menu options
                 HStack{
                     Text("Trending")
                         .font(.system(size: 40, weight: .bold))
@@ -57,9 +66,10 @@ struct Home : View {
                 }
                 .padding(.horizontal)
                 
+                //Third: Story Bar
                 HStack{
                     Text("Animated")
-                        .font(.caption)
+                        .font(.system(size: 15))
                         .foregroundColor(index == 0 ? .white : Color("Color").opacity(0.85))
                         .fontWeight(.bold)
                         .padding(.vertical,6)
@@ -71,7 +81,7 @@ struct Home : View {
                         }
                     
                     Text("20+ Series")
-                        .font(.caption)
+                        .font(.system(size: 15))
                         .foregroundColor(index == 1 ? .white : Color("Color").opacity(0.85))
                         .fontWeight(.bold)
                         .padding(.vertical,6)
@@ -87,6 +97,17 @@ struct Home : View {
                 .padding(.horizontal)
                 .padding(.top, 10)
                 
+                //Car View
+                ZStack{
+                    ForEach(stories.reversed()){ story in
+                        Image(story.image)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 250, height: 400)
+                            .cornerRadius(15)
+                    }
+                }
+                
                 Spacer()
             }
         }
@@ -95,4 +116,21 @@ struct Home : View {
                 .edgesIgnoringSafeArea(.all)
         )
     }
+    
+    //Creating a Dynamic View
+    func calculateWidth()->CGFloat{
+        let screen = UIScreen.main.bounds.width - 30
+    }
+    
+}
+
+//Sample Data for UI
+
+struct Story : Identifiable {
+    
+    var id : Int
+    var image : String
+    var offset : CGFloat
+    var title : String
+    
 }
