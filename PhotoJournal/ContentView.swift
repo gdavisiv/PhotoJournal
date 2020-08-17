@@ -103,10 +103,12 @@ struct Home : View {
                         Image(story.image)
                             .resizable()
                             .aspectRatio(contentMode: .fill)
-                            .frame(width: 250, height: 400)
+                            .frame(width: calculateWidth(), height: (UIScreen.main.bounds.height / 1.8) - CGFloat(story.id * 50))
                             .cornerRadius(15)
+                            .offset(x: story.id <= 2 ? CGFloat(story.id * 30) : 60)
                     }
                 }
+                .frame(height: UIScreen.main.bounds.height / 1.8)
                 
                 Spacer()
             }
@@ -120,6 +122,10 @@ struct Home : View {
     //Creating a Dynamic View
     func calculateWidth()->CGFloat{
         let screen = UIScreen.main.bounds.width - 30
+        
+        let width = screen - (2 * 30)
+        
+        return width
     }
     
 }
