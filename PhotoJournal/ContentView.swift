@@ -100,15 +100,38 @@ struct Home : View {
                 //Car View
                 ZStack{
                     ForEach(stories.reversed()){ story in
-                        Image(story.image)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: calculateWidth(), height: (UIScreen.main.bounds.height / 1.8) - CGFloat(story.id * 50))
-                            .cornerRadius(15)
-                            .offset(x: story.id <= 2 ? CGFloat(story.id * 30) : 60)
+                        HStack {
+                            Image(story.image)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: calculateWidth(), height: (UIScreen.main.bounds.height / 1.8) - CGFloat(story.id * 50))
+                                .cornerRadius(15)
+                                .offset(x: story.id <= 2 ? CGFloat(story.id * 30) : 60)
+                        }
+                        .contentShape(Rectangle())
+                        //Add Gesture
+                        .offset(x: story.offset)
+                        //Adding Drag Gesture
+                        .gesture(DragGesture().onChanged({ (value) in
+                            
+                            withAnimation{
+                                
+                                stories[story.id].offset = value.translation.width
+                            }
+                            
+                        }).onEnded({(value) in
+                            
+                            withAnimation{
+                                
+                            stories[story.id].offset = 0
+                            
+                            }
+                        }))
                     }
                 }
                 .frame(height: UIScreen.main.bounds.height / 1.8)
+                .padding(.horizontal,25)
+                .padding(.top,25)
                 
                 Spacer()
             }
