@@ -28,6 +28,8 @@ struct Home : View {
         Story(id: 2, image: "p2", offset: 0, title: "Love found again"),
         Story(id: 3, image: "p3", offset: 0, title: "The Haunted Grounds")
     ]
+    @State var scrolled = 0
+    
     
     var body: some View{
         ScrollView(.vertical, showsIndicators: true){
@@ -104,9 +106,9 @@ struct Home : View {
                             Image(story.image)
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
-                                .frame(width: calculateWidth(), height: (UIScreen.main.bounds.height / 1.8) - CGFloat(story.id * 50))
+                                .frame(width: calculateWidth(), height: (UIScreen.main.bounds.height / 1.8) - CGFloat(story.id - scrolled) * 50))
                                 .cornerRadius(15)
-                                .offset(x: story.id <= 2 ? CGFloat(story.id * 30) : 60)
+                                .offset(x: story.id - scrolled <= 2 ? CGFloat(story.id - scrolled) * 30 : 60)
                         }
                         .contentShape(Rectangle())
                         //Add Gesture
@@ -116,15 +118,35 @@ struct Home : View {
                             
                             withAnimation{
                                 
-                                stories[story.id].offset = value.translation.width
+                                //Disable drag gesture for last card
+                                if value.translation.width < 0 && story.id != stories.last!.id {
+                                    stories[story.id].offset = value.translation.width
+                
+                                }
+                                //restore cards
+                                else{
+                                    if story.id > 0{
+                                    stories[story.id - 1] = -(calculateWidth() + 60) + value.translation.width
+                                }
                             }
                             
                         }).onEnded({(value) in
                             
                             withAnimation{
                                 
-                            stories[story.id].offset = 0
-                            
+                                if value.translation.width < 0{
+                                    if -value.translation.width > 180{
+                                        //Moves the View Away
+                                        stories[story.id].offset = -(calculateWidth() + 60)
+                                        scrolled += 1
+                                    }
+                                    else{
+                                        stories[story.id].offset = 0
+                                    }
+                                }
+                                else{
+                                    //Restore the cards
+                                }
                             }
                         }))
                     }
