@@ -106,7 +106,7 @@ struct Home : View {
                             Image(story.image)
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
-                                .frame(width: calculateWidth(), height: (UIScreen.main.bounds.height / 1.8) - CGFloat(story.id - scrolled) * 50))
+                                .frame(width: calculateWidth(), height: (UIScreen.main.bounds.height / 1.8) - CGFloat(story.id - scrolled) * 50)
                                 .cornerRadius(15)
                                 .offset(x: story.id - scrolled <= 2 ? CGFloat(story.id - scrolled) * 30 : 60)
                         }
@@ -126,11 +126,11 @@ struct Home : View {
                                 //restore cards
                                 else{
                                     if story.id > 0{
-                                    stories[story.id - 1] = -(calculateWidth() + 60) + value.translation.width
+                                        stories[story.id - 1].offset = -(calculateWidth() + 60) + value.translation.width
+                                    }
                                 }
                             }
-                            
-                        }).onEnded({(value) in
+                        }).onEnded({ (value) in
                             
                             withAnimation{
                                 
