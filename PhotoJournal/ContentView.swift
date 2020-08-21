@@ -148,11 +148,11 @@ struct Home : View {
                                     //Restore the cards
                                     if story.id > 0{
                                         if value.translation.width > 180{
-                                            stories[story.id - ].offset = 0
+                                            stories[story.id - 1].offset = 0
                                             scrolled -= 1
                                         }
                                         else{
-                                            stories[story.id -1]/.offset = 0
+                                            stories[story.id - 1].offset = 0
                                             scrolled -= 1
                                         }
                                     }
