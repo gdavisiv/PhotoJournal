@@ -28,8 +28,8 @@ struct Home : View {
         Story(id: 2, image: "p2", offset: 0, title: "Love found again"),
         Story(id: 3, image: "p3", offset: 0, title: "The Haunted Grounds")
     ]
-    @State var scrolled = 0
     
+    @State var scrolled = 0
     
     var body: some View{
         ScrollView(.vertical, showsIndicators: true){
@@ -135,7 +135,8 @@ struct Home : View {
                             withAnimation{
                                 
                                 if value.translation.width < 0{
-                                    if -value.translation.width > 180{
+                                    
+                                    if -value.translation.width > 180 && story.id != stories.last!.id{
                                         //Moves the View Away
                                         stories[story.id].offset = -(calculateWidth() + 60)
                                         scrolled += 1
