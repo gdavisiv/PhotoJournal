@@ -103,12 +103,19 @@ struct Home : View {
                 ZStack{
                     ForEach(stories.reversed()){ story in
                         HStack {
-                            Image(story.image)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: calculateWidth(), height: (UIScreen.main.bounds.height / 1.8) - CGFloat(story.id - scrolled) * 50)
-                                .cornerRadius(15)
-                                .offset(x: story.id - scrolled <= 2 ? CGFloat(story.id - scrolled) * 30 : 60)
+                            ZStack(alignment: Alignment(horizontal: .leading, vertical: .bottom)){
+                                Image(story.image)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: calculateWidth(), height: (UIScreen.main.bounds.height / 1.8) - CGFloat(story.id - scrolled) * 50)
+                                    .cornerRadius(15)
+                                
+                                VStack(alignment: .leading, spacing: 18) {
+                                    
+                                }
+                                
+                            }
+                            .offset(x: story.id - scrolled <= 2 ? CGFloat(story.id - scrolled) * 30 : 60)
                         }
                         .contentShape(Rectangle())
                         //Add Gesture
@@ -153,7 +160,7 @@ struct Home : View {
                                             scrolled -= 1
                                         }
                                         else{
-                                            stories[story.id - 1].offset = 0
+                                            stories[story.id - 1].offset = -(calculateWidth() + 60)
                                             scrolled -= 1
                                         }
                                     }
