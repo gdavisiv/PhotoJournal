@@ -117,10 +117,14 @@ struct Home : View {
                                         .foregroundColor(Color(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)))
                                     
                                     Button(action: {}) {
-                                        Text("Read Later")
+                                        Text("Read Now")
                                             .font(.caption)
                                             .fontWeight(.bold)
                                             .foregroundColor(Color(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)))
+                                            .padding(.vertical,6)
+                                            .padding(.horizontal, 25)
+                                            .background(Color("Color1"))
+                                            .clipShape(Capsule())
                                     }
                                 }
                                 
@@ -163,8 +167,10 @@ struct Home : View {
                                     }
                                 }
                                 else{
+                                    
                                     //Restore the cards
                                     if story.id > 0{
+                                        
                                         if value.translation.width > 180{
                                             stories[story.id - 1].offset = 0
                                             scrolled -= 1
