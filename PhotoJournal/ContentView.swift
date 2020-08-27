@@ -111,10 +111,13 @@ struct Home : View {
                                     .cornerRadius(15)
                                 
                                 VStack(alignment: .leading, spacing: 18) {
-                                    Text(story.title)
-                                        .font(.title)
-                                        .fontWeight(.bold)
-                                        .foregroundColor(Color(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)))
+                                    HStack {
+                                        Text(story.title)
+                                            .font(.title)
+                                            .fontWeight(.bold)
+                                            .foregroundColor(Color(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)))
+                                        Spacer()
+                                    }
                                     
                                     Button(action: {}) {
                                         Text("Read Now")
@@ -127,7 +130,9 @@ struct Home : View {
                                             .clipShape(Capsule())
                                     }
                                 }
-                                
+                                .frame(width: calculateWidth() - 40)
+                                .padding(.leading, 20)
+                                .padding(.vertical, 20)
                             }
                             .offset(x: story.id - scrolled <= 2 ? CGFloat(story.id - scrolled) * 30 : 60)
                         }
@@ -189,7 +194,52 @@ struct Home : View {
                 .padding(.horizontal,25)
                 .padding(.top,25)
                 
-                Spacer()
+                HStack{
+                    Text("Trending")
+                        .font(.system(size: 40, weight: .bold))
+                        .foregroundColor(Color(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)))
+                    
+                    Spacer(minLength: 0)
+                    
+                    Button(action: {}) {
+                        Image(systemName: "rectangle.grid.1x2")
+                            .renderingMode(.template)
+                            .foregroundColor(Color(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)))
+                    }
+                }
+                .padding(.horizontal)
+                .padding(.top, 25)
+                
+                HStack{
+                    Text("Animated")
+                        .font(.system(size: 15))
+                        .foregroundColor(index == 0 ? .white : Color("Color").opacity(0.85))
+                        .fontWeight(.bold)
+                        .padding(.vertical,6)
+                        .padding(.horizontal,20)
+                        .background(Color("Color1").opacity(index == 0 ? 1 : 0))
+                        .clipShape(Capsule())
+                        .onTapGesture {
+                            index = 0
+                        }
+                    
+                    Text("20+ Series")
+                        .font(.system(size: 15))
+                        .foregroundColor(index == 1 ? .white : Color("Color").opacity(0.85))
+                        .fontWeight(.bold)
+                        .padding(.vertical,6)
+                        .padding(.horizontal,20)
+                        .background(Color("Color1").opacity(index == 1 ? 1 : 0))
+                        .clipShape(Capsule())
+                        .onTapGesture {
+                            index = 1
+                        }
+                    
+                    Spacer()
+                }
+                .padding(.horizontal)
+                .padding(.top, 10)
+                
             }
         }
         .background(
