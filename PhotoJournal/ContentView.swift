@@ -111,7 +111,17 @@ struct Home : View {
                                     .cornerRadius(15)
                                 
                                 VStack(alignment: .leading, spacing: 18) {
+                                    Text(story.title)
+                                        .font(.title)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(Color(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)))
                                     
+                                    Button(action: {}) {
+                                        Text("Read Later")
+                                            .font(.caption)
+                                            .fontWeight(.bold)
+                                            .foregroundColor(Color(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)))
+                                    }
                                 }
                                 
                             }
