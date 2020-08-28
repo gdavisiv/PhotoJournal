@@ -30,6 +30,7 @@ struct Home : View {
     ]
     
     @State var scrolled = 0
+    @State var index1 = 0
     
     var body: some View{
         ScrollView(.vertical, showsIndicators: true){
@@ -82,7 +83,7 @@ struct Home : View {
                             index = 0
                         }
                     
-                    Text("20+ Series")
+                    Text("20+ Stories")
                         .font(.system(size: 15))
                         .foregroundColor(index == 1 ? .white : Color("Color").opacity(0.85))
                         .fontWeight(.bold)
@@ -211,34 +212,47 @@ struct Home : View {
                 .padding(.top, 25)
                 
                 HStack{
-                    Text("Animated")
+                    Text("Latest")
                         .font(.system(size: 15))
-                        .foregroundColor(index == 0 ? .white : Color("Color").opacity(0.85))
+                        .foregroundColor(index1 == 0 ? .white : Color("Color").opacity(0.85))
                         .fontWeight(.bold)
                         .padding(.vertical,6)
                         .padding(.horizontal,20)
-                        .background(Color("Color1").opacity(index == 0 ? 1 : 0))
+                        .background(Color("Color").opacity(index1 == 0 ? 1 : 0))
                         .clipShape(Capsule())
                         .onTapGesture {
-                            index = 0
+                            index1 = 0
                         }
                     
-                    Text("20+ Series")
+                    Text("5+ Stories")
                         .font(.system(size: 15))
-                        .foregroundColor(index == 1 ? .white : Color("Color").opacity(0.85))
+                        .foregroundColor(index1 == 1 ? .white : Color("Color").opacity(0.85))
                         .fontWeight(.bold)
                         .padding(.vertical,6)
                         .padding(.horizontal,20)
-                        .background(Color("Color1").opacity(index == 1 ? 1 : 0))
+                        .background(Color("Color").opacity(index1 == 1 ? 1 : 0))
                         .clipShape(Capsule())
                         .onTapGesture {
-                            index = 1
+                            index1 = 1
                         }
                     
                     Spacer()
                 }
                 .padding(.horizontal)
                 .padding(.top, 10)
+                
+                HStack{
+                    Image("p1")
+                        .resizable()
+                        .aspectRatio(contentMode: /*@START_MENU_TOKEN@*/.fill/*@END_MENU_TOKEN@*/)
+                        .frame(width: UIScreen.main.bounds.width - 80, height: 250)
+                        .cornerRadius(15)
+                    
+                    Spacer(minLength: 0)
+                }
+                .padding(.horizontal)
+                .padding(.top, 20)
+                .padding(.bottom)
                 
             }
         }
